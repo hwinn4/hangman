@@ -53,7 +53,6 @@ class Cli
 		if status == "won"
 			puts "\n \n You spelled: #{@game.guessed_word.join(" ")}"
 			puts "\n You survived!"
-
 		else
 			puts "\n \n Whomp whomp! You lose!"
 		end
