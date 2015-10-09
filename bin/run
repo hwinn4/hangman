@@ -6,16 +6,12 @@ require_relative '../config/environment.rb'
 cli = Cli.new
 
 cli.start
-# i = 0
 while cli.game.on
-	#...
-	# puts "GAME IS ON"
-	# if i>5 
-	#	cli.game.on = false
-	# end
-	# i+=1
 	cli.get_user_input
 	cli.display
 end
 
-puts "GAME IS OFFFF"
+# cli.play_again
+
+puts "\n GAME IS OFFFF"
+

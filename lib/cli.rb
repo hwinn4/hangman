@@ -16,33 +16,44 @@ class Cli
 	end
 
 	def instructions
+		puts "The computer will choose a word."
+		puts "Guess the word by guessing one letter at a time."
+		puts "If you guess incorrectly 6 times, you will hang!"
 	end
 
 	def get_user_input
 		#@letter = "a"
-		puts "\n Enter a letter. You can be wrong 6 times OR YOU WILL HANG."
+		puts "\n Enter a letter."
 		@letter = gets.chomp
+		game.update_game
 	end
 
 
 	def display
-		game.update_game
-		#binding.pry
-		print game.guessed_word.join(' ')
-		puts "\n \n #{game.turns} turns left."
+		print "\n \n #{game.guessed_word.join(' ')}"
+		if @game.on
+			puts "\n \n #{game.turns} turns left."
+		end
 	end
 
 	def alert_user
-		# tells the user if input invalid
+		puts "Not valid! Try again."
 	end
 
-	def help
-	end
+	# def play_again
+	# 	puts "Do you want to play again? y/n"
+	# 	choice = gets.chomp
+	# 	if choice == "y"
+	# 		start
+	# 	end
+	# end
 
-	def new_game
-	end
-
-	def end_game
+	def end_game(status)
+		if status == "won"
+			puts "\n \n You survived!"
+		else
+			puts "\n \n Whomp whomp! You lose!"
+		end
 	end
 
 	def exit

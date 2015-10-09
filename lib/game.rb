@@ -1,7 +1,7 @@
 class Game
 
-	attr_accessor :on, :cli
-	attr_reader :guessed_word, :turns
+	attr_accessor :on, :cli, :turns
+	attr_reader :guessed_word
 
 	def initialize
 		generate_word
@@ -12,27 +12,39 @@ class Game
 	end
 
 	def generate_word
-		@word = "ducks"
+		@word = "furry"
 		# @word.split
 	end
 
 	def update_game
 		if check_letter
-			update_guessed_word
+			in_word = update_guessed_word
 			@guessed_letters << cli.letter
-			@turns -= 1
-			# how do we update the guessed word?
+			if word_spelled?
+				@cli.end_game("won")
+				self.on = false
+			end
+			if !(in_word)
+				self.turns -= 1
+			end
+			if out_of_turns?
+				@cli.end_game("lost")
+				self.on = false
+			end
 		else
 			cli.alert_user
 		end
 	end
 
 	def update_guessed_word
+		in_word = false
 		@word.split("").each_with_index do |letter, index|
 			if cli.letter == letter
 				@guessed_word[index] = letter
+				in_word = true
 			end
 		end
+		in_word
 	end
 
 	def check_letter
@@ -42,11 +54,11 @@ class Game
 	end
 
 	def word_spelled?
-		@guessed_word == @word
+		@guessed_word.join == @word
 	end
 
 	def out_of_turns?
-		turns < 1 && !(win?)
+		self.turns < 1
 	end
 
 end
