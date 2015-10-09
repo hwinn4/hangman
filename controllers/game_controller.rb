@@ -1,4 +1,4 @@
-attr_accessor :on, :cli, :turns
+
 
 # actions of the game controller:
 
@@ -6,34 +6,55 @@ attr_accessor :on, :cli, :turns
 # compares p1 word and p2 word
 # determines win/lose status
 # set game on/off
+class Game_controller
+  
+  attr_reader :game
+  # attr_accessor :on, :cli, :turns
+  
+  def initialize
+    @game = Game.new
+  end
+
+  def update_game(guessed_letter)
+    # if the letter is valid...
+    if @game.check_letter(guessed_letter)
+      decrement = @game.update_guessed_word(guessed_letter)
+      @game.p2.letters << guessed_letter
 
 
-def update_game
-    if check_letter
-      decrement = p2.word.update_guessed_word
-      p2.guessed_letters << cli.letter
-
-      # MOVE TO GAME?
-      if word_spelled?
-        @cli.end_game("won")
-        self.on = false
+      # is the game solved?
+      if @game.word_spelled?
+        binding.pry
+        view = Won_game.new
+        view.render(@game.p2.word.name)
+        @game.on = false
       end
 
-      if !(decrement)
-        self.turns -= 1
+      # decrement turns
+      if decrement
+        @game.p2.turns -= 1
+        #binding.pry
       end
-      if out_of_turns?
-        @cli.end_game("lost")
-        self.on = false
+
+      # is the game lost?
+      if @game.p2.out_of_turns?
+        view = Lose_game.new
+        view.render
+        @game.on = false
       end
+
+      # resume regular game play
+      if @game.on
+        view = Game_display.new
+        #binding.pry
+        view.render(@game.p2.word.name, @game.p2.turns)
+      end
+    # invalid input error message
     else
-      cli.alert_user
+      view = Alert_error.new
+      view.render
     end
   end
+end
 
-    def initialize
-    @on = true
-    # @turns = 6
-    # @guessed_letters = []
-    # @guessed_word = Array.new(generate_word.length,'_')
-  end
+    

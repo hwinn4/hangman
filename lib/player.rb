@@ -1,10 +1,10 @@
 class Player
 
-attr_accessor :word
+attr_accessor :word, :turns, :letters
 
   def initialize
     @turns = 6
-    @guessed_letters = []
+    @letters = []
   end
 
   def out_of_turns?
