@@ -3,6 +3,8 @@ class Game
 	attr_accessor :on, :cli, :turns
 	attr_reader :guessed_word
 
+	WORDS = ["rabbit", "flatiron", "salty"]
+
 	def initialize
 		generate_word
 		@on = true
@@ -12,8 +14,7 @@ class Game
 	end
 
 	def generate_word
-		@word = "furry"
-		# @word.split
+		@word = WORDS.sample
 	end
 
 	def update_game
@@ -24,6 +25,7 @@ class Game
 				@cli.end_game("won")
 				self.on = false
 			end
+
 			if !(in_word)
 				self.turns -= 1
 			end

@@ -30,8 +30,8 @@ class Cli
 
 
 	def display
-		print "\n \n #{game.guessed_word.join(' ')}"
 		if @game.on
+			print "\n \n #{game.guessed_word.join(' ')}"
 			puts "\n \n #{game.turns} turns left."
 		end
 	end
@@ -40,20 +40,24 @@ class Cli
 		puts "Not valid! Try again."
 	end
 
-	# def play_again
-	# 	puts "Do you want to play again? y/n"
-	# 	choice = gets.chomp
-	# 	if choice == "y"
-	# 		start
-	# 	end
-	# end
+	def play_again
+		puts "Do you want to play again? y/n"
+		choice = gets.chomp
+		if choice == "y"
+			@game = Game.new
+			@game.cli = self
+		end
+	end
 
 	def end_game(status)
 		if status == "won"
-			puts "\n \n You survived!"
+			puts "\n \n You spelled: #{@game.guessed_word.join(" ")}"
+			puts "\n You survived!"
+
 		else
 			puts "\n \n Whomp whomp! You lose!"
 		end
+		play_again
 	end
 
 	def exit

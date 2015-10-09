@@ -7,8 +7,10 @@ cli = Cli.new
 
 cli.start
 while cli.game.on
+  cli.display
 	cli.get_user_input
-	cli.display
+  system("clear")
+	
 end
 
 # cli.play_again
