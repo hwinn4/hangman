@@ -7,7 +7,7 @@ require_relative '../config/environment.rb'
 # cli.start
 
 controller = Game_controller.new
-
+system("clear")
 view = Game_greeting.new
 view.render
 while controller.game.on

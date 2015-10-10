@@ -55,6 +55,7 @@ class Game_controller
     else
       view = Alert_error.new
       view.render
+      sleep(2)
     end
   end
 end
