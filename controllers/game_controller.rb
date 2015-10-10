@@ -24,7 +24,7 @@ class Game_controller
 
       # is the game solved?
       if @game.word_spelled?
-        binding.pry
+        #binding.pry
         view = Won_game.new
         view.render(@game.p2.word.name)
         @game.on = false

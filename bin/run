@@ -15,12 +15,13 @@ while controller.game.on
   word = controller.game.p2.word.name
   turns = controller.game.p2.turns
   view.render(word,turns)
-  binding.pry
+  
   view = User_input.new
-  data = view.render
+  #binding.pry
+  data = view.render 
   controller.update_game(data)
 	# cli.get_user_input
-  #system("clear")
+  system("clear")
 	
 end
 

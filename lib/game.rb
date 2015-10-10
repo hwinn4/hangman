@@ -27,7 +27,7 @@ attr_accessor :on, :p1, :p2
    # word completely spelled?
   # rewrite!
   def word_spelled?
-    @p2.word.name == @p1.word.name
+    @p2.word.name.join == @p1.word.name
   end
 
   # insert correctly-guessed letters
