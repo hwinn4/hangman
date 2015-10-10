@@ -1,5 +1,3 @@
-
-
 # actions of the game controller:
 
 # updates the word in progress (p2)
@@ -27,6 +25,9 @@ class Game_controller
         #binding.pry
         view = Won_game.new
         view.render(@game.p2.word.name)
+        # delays turning off game
+        # so user can read the view above
+        sleep(2)
         @game.on = false
       end
 
@@ -40,6 +41,7 @@ class Game_controller
       if @game.p2.out_of_turns?
         view = Lose_game.new
         view.render
+        sleep(2)
         @game.on = false
       end
 
