@@ -2,7 +2,7 @@ class Word
   
   attr_reader :guessed_word, :name
 
-  WORDS = ["rabbit", "flatiron", "salty"]
+  WORDS = ["rabbit", "flatiron", "salty", "superfluous"]
   @@word = ""
 
   # instantiate Word object
@@ -19,13 +19,11 @@ class Word
 
   # choose a complete word
   def answer
-    #@word
     @name = WORDS.sample 
   end
 
   # make in-progress word
   def blank_word
-    #@guessed_word
    @name = Array.new(@@word.length,'_')
     
   end

@@ -2,10 +2,6 @@
 
 require_relative '../config/environment.rb'
 
-# instantiate new CLI
-# cli = Cli.new
-# cli.start
-
 controller = Game_controller.new
 system("clear")
 view = Game_greeting.new
@@ -15,17 +11,10 @@ while controller.game.on
   word = controller.game.p2.word.name
   turns = controller.game.p2.turns
   view.render(word,turns)
-  
-  view = User_input.new
-  #binding.pry
-  data = view.render 
+  data = User_input.new.render
   controller.update_game(data)
-	# cli.get_user_input
   system("clear")
-	
 end
-
-# cli.play_again
 
 puts "\n GAME IS OFFFF"
 

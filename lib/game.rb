@@ -25,7 +25,6 @@ attr_accessor :on, :p1, :p2
 
 
    # word completely spelled?
-  # rewrite!
   def word_spelled?
     @p2.word.name.join == @p1.word.name
   end
@@ -41,6 +40,8 @@ attr_accessor :on, :p1, :p2
     end
     decrement
   end
+
+  
 
 
 

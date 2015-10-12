@@ -1,5 +1,4 @@
 # actions of the game controller:
-
 # updates the word in progress (p2)
 # compares p1 word and p2 word
 # determines win/lose status
@@ -13,6 +12,14 @@ class Game_controller
     @game = Game.new
   end
 
+  def play_again
+    view = Play_again.new
+    data = view.render
+    if data == "y"
+      @game = Game.new
+    end
+  end
+
   def update_game(guessed_letter)
     # if the letter is valid...
     if @game.check_letter(guessed_letter)
@@ -22,19 +29,16 @@ class Game_controller
 
       # is the game solved?
       if @game.word_spelled?
-        #binding.pry
         view = Won_game.new
         view.render(@game.p2.word.name)
-        # delays turning off game
-        # so user can read the view above
         sleep(2)
         @game.on = false
+        play_again
       end
 
       # decrement turns
       if decrement
         @game.p2.turns -= 1
-        #binding.pry
       end
 
       # is the game lost?
@@ -43,12 +47,13 @@ class Game_controller
         view.render
         sleep(2)
         @game.on = false
+        play_again
       end
+   
 
       # resume regular game play
       if @game.on
         view = Game_display.new
-        #binding.pry
         view.render(@game.p2.word.name, @game.p2.turns)
       end
     # invalid input error message
@@ -58,6 +63,9 @@ class Game_controller
       sleep(2)
     end
   end
+
+
+
 end
 
     
